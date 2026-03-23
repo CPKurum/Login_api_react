@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-8 bg-gray-100 px-4">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-8 bg-blue-200 px-4">
 
       <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 text-center">
         frontend-ia-lib
