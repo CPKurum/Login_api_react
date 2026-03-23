@@ -5,7 +5,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center justify-center gap-8 bg-blue-200 px-4">
 
       <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 text-center">
-        frontend-ia-lib
+        Pantalla principal sobre la vista de registro e ingreso del usuario
       </h1>
 
       <nav className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto">
