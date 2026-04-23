@@ -1,21 +1,17 @@
-const API_BASE = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:5330'
+import { apiAuthRequest, apiRequest } from './apiClient'
 
-export async function registerUser(data) {
-  const res = await fetch(`${API_BASE}/register`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  console.log("RESPUESTA DEL SERVIDOR:", res)
-  const result = await res.json()
+export function registerUser(data) {
+  return apiRequest('/register', 'POST', data)
+}
 
-  if (!res.ok) {
-    const error = new Error(result.error || 'Error en el registro')
-    error.status = res.status
-    throw error
-  }
+export function loginUser(data) {
+  return apiRequest('/login', 'POST', data)
+}
 
-  return result
+export function getCurrentUser() {
+  return apiAuthRequest('/user', 'GET')
+} 
+
+export function getPublicUserByUsername(username) {
+  return apiRequest(`/usuario/${encodeURIComponent(username)}`, 'GET')
 }

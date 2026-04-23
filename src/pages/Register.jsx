@@ -8,6 +8,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
+  const [token, setToken] = useState(null)
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
   const handleFile = (e) => setPerfil(e.target.files[0] ?? null)
@@ -42,6 +43,7 @@ export default function Register() {
       const result = await registerUser(data)  // llamada a auth.js
       setSuccess('Usuario registrado correctamente')
       localStorage.setItem('token', result.token)  // guardar JWT
+      setToken(result.token) // <-- guardar también en estado
       setForm({ username: '', email: '', password: '', nickname: '' })
       setPerfil(null)
     } catch (err) {
@@ -67,7 +69,7 @@ export default function Register() {
         <h2 className="text-center text-2xl font-bold">Registro</h2>
         {error && <p className="text-red-600 text-sm">{error}</p>}
         {success && <p className="text-green-600 text-sm">{success}</p>}
-
+        {token && ( <div className="rounded bg-gray-200 p-2 text-xs break-all"> <strong>Token recibido:</strong> {token} </div> )}
         {/* INPUTS */}
         <input type="text" name="username" placeholder="Username" required onChange={handleChange} value={form.username} className="w-full rounded border p-2" />
         <input type="email" name="email" placeholder="Email" required onChange={handleChange} value={form.email} className="w-full rounded border p-2" />

@@ -1,16 +1,44 @@
-# React + Vite
+## Avance
+### Usuario normal
+registrarse
+iniciar sesión
+ver libros
+buscar libros
+ver detalle
+pedir préstamo
+devolver libro
+ver historial
+### Administrador
+gestionar usuarios
+añadir libros
+editar libros
+eliminar libros
+ver préstamos
+gestionar devoluciones
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Register
+## Descripción
+Permite a un usuario crear una cuenta en la plataforma.
 
-Currently, two official plugins are available:
+### Comportamiento actual
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- El usuario envía email y contraseña y los demás datos necesarios.
+- El backend crea el usuario en la base de datos.
+- Se recibe un token de autenticación y se guarda, si el usuario fue creado correctamente.
+- Actualmente el usuario permanece en la misma página después del registro.(END)
 
-## React Compiler
+### Pendiente
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Redirigir automáticamente a la página principal después del registro.
+- Guardar el token en el cliente (localStorage o cookie).
+- Actualizar el estado de autenticación en React.
+### Endpoint (Link)
+/register  (luego de /auth/? debería?)
 
-## Expanding the ESLint configuration
+# Login
+## Descripción
+Permite a un usuario ingresar a la plataforma con su usuario y contraseña
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Comportamiento actual
+
+- 

@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-
-const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:3000'
+import { Link, useNavigate } from 'react-router-dom'
+import { loginUser } from '../api/auth'
 
 export default function Login() {
+  const navigate = useNavigate()
+  const [error, setError] = useState(null)
+
   const [data, setData] = useState({
     username: '',
     password: '',
@@ -18,20 +20,21 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+    setError(null)
+    console.log("📤 DATA QUE SE ENVÍA:", data) // 👈 AQUÍ
     try {
-      const res = await fetch(`${API_BASE}/api/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
+      const result = await loginUser(data)
+      console.log("📥 RESPUESTA DEL SERVIDOR:", result) // 👈 AQUÍ
+      // guardar token
+      localStorage.setItem('token', result.token)
+      console.log("📥 TOKEN GUARDADO EN LOCAL STORAGE:", result.token) // 👈 AQUÍ
+      // redirigir al perfil publico/privado unificado
+      const profileUsername = result?.username ?? data.username
+      navigate(`/user/${profileUsername}`)
 
-      const result = await res.json()
-      console.log(result)
     } catch (err) {
-      console.error(err)
+      console.error("❌ ERROR:", err) // 👈 AQUÍ
+      setError(err.message || 'Error al iniciar sesión')
     }
   }
 
@@ -40,8 +43,9 @@ export default function Login() {
       <form
         onSubmit={handleSubmit}
         className="w-96 space-y-4 rounded-xl bg-white p-8 shadow-lg"
-      >
+        >
         <h2 className="text-center text-2xl font-bold">Login</h2>
+        {error && ( <p className="text-red-600 text-sm text-center"> {error} </p> )}
 
         <input
           type="text"
