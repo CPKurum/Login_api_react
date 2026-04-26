@@ -43,11 +43,11 @@ export default function User() {
           setIsOwner(false)
         }
         const hasToken = Boolean(localStorage.getItem('token'))
+        console.log(localStorage.getItem('token'))
 
         if (hasToken) {
           try {
-            const currentUser = await getCurrentUser()
-    
+            const currentUser = await getPublicUserByUsername(routeUsername)  
             if (
               isMounted &&
               currentUser?.username &&
@@ -55,8 +55,11 @@ export default function User() {
             ) {
               setIsOwner(true)
             }
+            console.log("🧠 routeUsername:", routeUsername)
+            console.log("👤 CURRENT USER:", currentUser)
+    console.log("🔎 comparison:", currentUser?.username === routeUsername)
           } catch {
-            // fallback a público
+            console.error("❌ ERROR getCurrentUser:", err)
           }
         }
     

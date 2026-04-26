@@ -29,7 +29,12 @@ async function request(endpoint, method = 'GET', data = null, withAuth = false) 
     error.status = res.status
     throw error
   }
-
+  // console.log("📡 REQUEST DEBUG:", {
+  //   endpoint,
+  //   withAuth,
+  //   token: localStorage.getItem('token'),
+  //   headers: options.headers
+  // })
   return result
 }
 
