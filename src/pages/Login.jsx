@@ -27,7 +27,7 @@ export default function Login() {
       console.log("📥 RESPUESTA DEL SERVIDOR:", result) // 👈 AQUÍ
       // guardar token
       localStorage.setItem('token', result.token)
-      console.log("📥 TOKEN GUARDADO EN LOCAL STORAGE:", result.token) // 👈 AQUÍ
+      console.log("Login.jsx 📥 TOKEN EN LOCAL STORAGE:", result.token) // 👈 AQUÍ
       // redirigir al perfil publico/privado unificado
       const profileUsername = result?.username ?? data.username
       navigate(`/user/${profileUsername}`)

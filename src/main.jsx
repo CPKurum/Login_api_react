@@ -5,14 +5,9 @@ import './index.css'
 import App from './App.jsx'
 
 // 🌙 Inicializar tema
-const theme = localStorage.getItem('theme')
-
-if (!theme) {
-  localStorage.setItem('theme', 'dark')
-  document.documentElement.classList.add('dark')
-} else if (theme === 'dark') {
-  document.documentElement.classList.add('dark')
-}
+const theme = localStorage.getItem('theme') || 'dark'
+document.documentElement.classList.toggle('dark', theme === 'dark')
+localStorage.setItem('theme', theme)  // if (!localStorage.getItem('theme')) // antes de localStorage.__
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

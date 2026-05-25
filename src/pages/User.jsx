@@ -3,7 +3,10 @@ import { useParams } from 'react-router-dom'
 import Cover from '../components/user/Cover'
 import Profile from '../components/user/Profile'
 import BookGrid from '../components/books/BookGrid'
+import BookbyUser from '../components/books/BookbyUser'
+
 import { getCurrentUser, getPublicUserByUsername } from '../api/auth'
+import { getMyBooks } from '../api/derivado/book'
 
 const fallbackUser = {
   nickname: 'Juan Pérez',
@@ -18,6 +21,7 @@ export default function User() {
   const [isOwner, setIsOwner] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [Libros, setLibros] = useState([])
 
   useEffect(() => {
     let isMounted = true
@@ -43,22 +47,27 @@ export default function User() {
           setIsOwner(false)
         }
         const hasToken = Boolean(localStorage.getItem('token'))
-        console.log(localStorage.getItem('token'))
+        console.log("User.jsx: ",localStorage.getItem('token'))
 
         if (hasToken) {
           try {
-            const currentUser = await getPublicUserByUsername(routeUsername)  
+            const currentUser = await getCurrentUser()
+            console.log("📥 CURRENT USER RAW:", currentUser)
+            
             if (
               isMounted &&
-              currentUser?.username &&
-              currentUser.username === routeUsername
+              currentUser?.username === routeUsername
             ) {
               setIsOwner(true)
+              const currentBooks = await getMyBooks()
+              setLibros(currentBooks)
+              console.log(" CURRENT books raw: ", currentBooks)
             }
-            console.log("🧠 routeUsername:", routeUsername)
-            console.log("👤 CURRENT USER:", currentUser)
-    console.log("🔎 comparison:", currentUser?.username === routeUsername)
-          } catch {
+            
+            // console.log("🧠 routeUsername:", routeUsername)
+            // console.log("👤 CURRENT USER:", currentUser)
+            // console.log("🔎 comparison:", currentUser?.username === routeUsername)
+          } catch (err) {
             console.error("❌ ERROR getCurrentUser:", err)
           }
         }
@@ -79,12 +88,12 @@ export default function User() {
       isMounted = false
     }
   }, [routeUsername])
-
+  console.log(Libros)
   const books = [
-    { id: 1, title: 'Solo Leveling', cover: 'https://picsum.photos/200/300?random=1' },
-    { id: 2, title: 'Overlord', cover: 'https://picsum.photos/200/300?random=2' },
-    { id: 3, title: 'Re:Zero', cover: 'https://picsum.photos/200/300?random=3' },
-    { id: 4, title: 'Classroom of the Elite', cover: 'https://picsum.photos/200/300?random=4' },
+    { id: 1, title: 'Solo Leveling', cover: 'https://picsum.photos/300/450?random=1' },
+    { id: 2, title: 'Overlord', cover: 'https://picsum.photos/300/450?random=2' },
+    { id: 3, title: 'Re:Zero', cover: 'https://picsum.photos/300/450?random=3' },
+    { id: 4, title: 'Classroom of the Elite', cover: 'https://picsum.photos/300/450?random=4' },
   ]
 
   return (
@@ -99,7 +108,7 @@ export default function User() {
         username={user.username}
         perfil={user.perfil}
       />
-
+      {isOwner && <BookbyUser libros={Libros} />}
       {isOwner && <BookGrid books={books} />}
 
     </div>

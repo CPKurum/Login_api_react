@@ -17,7 +17,7 @@
           changeOrigin: true,
           secure: false,
         },
-        '/usuario': { // 👈 IMPORTANTE
+        '/users': { // 👈 IMPORTANTE
           target: 'http://127.0.0.1:5330',
           changeOrigin: true,
           secure: false,

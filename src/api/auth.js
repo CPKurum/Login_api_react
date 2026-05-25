@@ -1,17 +1,39 @@
-import { apiAuthRequest, apiRequest } from './apiClient'
+// import { apiAuthRequest, apiRequest } from './apiClient'
+
+// export function registerUser(data) {
+//   return apiRequest('/register', 'POST', data)
+// }
+
+// export function loginUser(data) {
+//   return apiRequest('/login', 'POST', data)
+// }
+
+// export function getCurrentUser() {
+//   return apiAuthRequest('/me', 'GET')
+// } 
+
+// export function getPublicUserByUsername(username) {
+//   return apiRequest(`/users/${encodeURIComponent(username)}`, 'GET')
+// }
+
+// -------------
+import { publicRequest } from './publicClient'
+import { authRequest } from './authClient'
 
 export function registerUser(data) {
-  return apiRequest('/register', 'POST', data)
+  return publicRequest('/register', 'POST', data)
 }
 
 export function loginUser(data) {
-  return apiRequest('/login', 'POST', data)
+  return publicRequest('/login', 'POST', data)
 }
 
 export function getCurrentUser() {
-  return apiAuthRequest('/user', 'GET')
-} 
+  return authRequest('/me')
+}
 
 export function getPublicUserByUsername(username) {
-  return apiRequest(`/usuario/${encodeURIComponent(username)}`, 'GET')
+  return publicRequest(
+    `/user/${encodeURIComponent(username)}`
+  )
 }
