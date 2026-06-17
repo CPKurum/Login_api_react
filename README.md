@@ -18,12 +18,18 @@ gestionar devoluciones
 
 # Endpoints faltantes
 #[get("/me")] fn get_user(req: HttpRequest) // Validamos y mostramos la información del usuario usando un token, salida data
+
 #[get("/user/{username_link}")] fn get_user_page(name:<String>) // Página publica del usuario.
 
+
 #[get("/user/{username}/libros")] fn get_libros_publicos_x_user(username:<String>) // todos los libros públicos de un usuario
+
 #[get("/me/libros")] fn get_all_books_user(req: HttpRequest) // Validamos token, y mostramos todos los libros de 1 usuario
+
 #[post("/me/libros")] fn post_books_x_user(param:<NuevoLibroUsuario>) // Registrar la relación entre un libro y usuario. Tabla relacional, salida id
+
 #[get("/me/sufle_libro")] fn get_books_x_user(id: Path<i32>) // Obtener varias tablas sql, de libros, relacionadas sobre 1 user
+
 
 # Register
 ## Descripción
@@ -61,48 +67,94 @@ feature-based architecture
 domain-driven frontend structure
 ---------------------------------------
 src/
+
 ├── features/
+
 │   └── books/
+
 │       ├── api/
+
 │       │   └── booksApi.js
+
 │       │
+
 │       ├── components/
+
 │       │   ├── BookCard.jsx
+
 │       │   └── BookForm.jsx
+
 │       │
+
 │       ├── pages/
+
 │       │   ├── CreateBook.jsx
+
 │       │   └── EditBook.jsx
+
 │       │
+
 │       ├── hooks/
+
 │       │   └── useBooks.js
+
 │       │
+
 │       └── utils/
+
 │           └── validators.js
+
 │
+
 ├── layouts/
+
 ├── shared/
+
 ├── routes/
+
 └── main.jsx
+
 ----------------------------------------
+
 src/
+
 ├── features/
+
 │   ├── auth/
+
 │   │   ├── api/
+
 │   │   ├── components/
+
 │   │   ├── hooks/
+
 │   │   └── pages/
+
 │   │
+
 │   ├── books/
+
 │   │   ├── api/
+
 │   │   ├── components/
+
 │   │   ├── hooks/
+
 │   │   ├── pages/
+
 │   │   └── utils/
+
 │   │
+
 │   └── users/
+
 │
+
 ├── layouts/
+
 ├── routes/
+
 ├── shared/
+
 └── main.jsx
+

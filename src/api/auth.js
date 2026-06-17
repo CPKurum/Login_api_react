@@ -36,4 +36,4 @@ export function getPublicUserByUsername(username) {
   return publicRequest(
     `/user/${encodeURIComponent(username)}`
   )
-}
+} // auth.js
